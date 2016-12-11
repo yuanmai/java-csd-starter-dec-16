@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 git checkout master -b team-a
 sed -e 's/csd.starter/csd.starter.teama/g' pom.xml | tee pom.xml
