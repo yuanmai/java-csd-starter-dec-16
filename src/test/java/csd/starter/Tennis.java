@@ -1,14 +1,24 @@
 package csd.starter;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 public class Tennis {
 	private int id;
-	private int x;
-	private int y;
+	private Location location;
 	private String tennisName;
-	public Tennis(int id, int x, int y){
+	
+	private static ArrayList<Tennis> tennisAssembly = new ArrayList(10);
+	
+	public static ArrayList<Tennis> getTennisAssembly() {
+		return tennisAssembly;
+	}
+	public static void setTennisAssembly(ArrayList<Tennis> tennisAssembly) {
+		Tennis.tennisAssembly = tennisAssembly;
+	}
+	public Tennis(int id, Location location){
 		this.id=id;
-		this.x=x;
-		this.y=y;
+		this.location = location;
 	}
 	public int getId() {
 		return id;
@@ -16,17 +26,11 @@ public class Tennis {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getX() {
-		return x;
+	public Location getLocation() {
+		return location;
 	}
-	public void setX(int x) {
-		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	public void setY(int y) {
-		this.y = y;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	public String getTennisName() {
 		return tennisName;
@@ -34,6 +38,4 @@ public class Tennis {
 	public void setTennisName(String tennisName) {
 		this.tennisName = tennisName;
 	}
-	
-	
 }
