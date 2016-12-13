@@ -10,12 +10,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TennisReservation {
 	public static Map<String, String> reservedList = new ConcurrentHashMap<String, String>();
 	public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/mm/dd hh");
-	public static String makeReservation(Date bookTime, int hour, String user){
+	public static void makeReservation(Date bookTime, int hour, String user){
 		if(isValiable(bookTime, hour)){
 			reservation(bookTime, hour, user);
-			return "success";
+			System.out.print("success");
 		}else{
-			return "failed";
+			System.out.print("failed");
 		}
 	}
 	
