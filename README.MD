@@ -18,7 +18,6 @@ Reservation
 
 
 #moment interval
-
 reservation record
 payment record
 published court information
