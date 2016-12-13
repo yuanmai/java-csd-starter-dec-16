@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+
+import csd.starter.vo.Count;
+import csd.starter.vo.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,8 +30,11 @@ public class ReservationTest {
 	    Date bookDate;
 		try {
 			bookDate = dateFormat.parse("2016/12/13 15");
-            TennisReservation.makeReservation(bookDate, 2, "user1");
+			Player p1 = new Player("user1");
+			Count c1 = new Count(1);
+            TennisReservation.makeReservation(bookDate, 2, p1,c1);
 			Assert.assertEquals("success",ba.toString());
+
 					} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
