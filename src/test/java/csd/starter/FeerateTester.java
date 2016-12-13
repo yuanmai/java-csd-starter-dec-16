@@ -3,6 +3,9 @@ package csd.starter;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -20,6 +23,14 @@ public class FeerateTester {
         Assert.assertEquals(9999, Feerate.fee(23));
 
 
+    }
+
+    @Test
+    public void uat(){
+        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(ba));
+        Main.e2e(new ByteArrayInputStream("8".getBytes()));
+        Assert.assertEquals("5\n", ba.toString());
     }
 
 
