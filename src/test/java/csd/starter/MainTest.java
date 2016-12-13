@@ -14,5 +14,5 @@ public class MainTest {
 
         assertEquals(Integer.valueOf(2), inc.apply(2));
     }
-
+   
 }
