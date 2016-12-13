@@ -3,22 +3,24 @@ package csd.starter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-//        String input = "1 fish 2 fish red fish blue fish";
-        Scanner s = new Scanner(System.in).useDelimiter("\\s*fish\\s*");
-        scanner(s); 
+//      String input = "10,10";
+    	System.out.println("Please input location x,y,  ");
+    	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
+    	scanner(s); 
         
     }
 
 	public static void scanner(Scanner s) {
-		System.out.println(s.nextInt());
-        System.out.println(s.nextInt());
-        System.out.println(s.next());
-        System.out.println(s.next());
+		int x = s.nextInt();
+        int y = s.nextInt();
+        System.out.println(x);
+        System.out.println(y);
         s.close();
 	}
 
