@@ -18,19 +18,18 @@ Reservation
 
 
 #moment interval
-reservation record
-payment record
-published court information
-reservation notification*
+
+reservation record,payment record,published court information,reservation notification*
 
 #Party Place Thing
-court
-court manager
-court calendar
-customer
+
+court,court manager,court calendar,customer
 
 #role
+
 customer: player
 
 #description
+
 FeeRate table
+
