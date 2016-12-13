@@ -12,7 +12,7 @@ public class MainTest {
     public void lambda() {
         Function<Integer, Integer> inc = (i) -> i + 1;
 
-        assertEquals(Integer.valueOf(2), inc.apply(2));
+        assertEquals(Integer.valueOf(3), inc.apply(2));
     }
 
 }
