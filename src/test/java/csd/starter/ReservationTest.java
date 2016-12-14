@@ -65,22 +65,24 @@ public class ReservationTest {
 
     @Test
     public void one_should_only_book_one_court_per_day() throws ParseException {
-        ByteArrayOutputStream ba = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(ba));
+  
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh");
-        Date bookDate = dateFormat.parse("2016/12/25 15");
+        Date bookDate = dateFormat.parse("2016/11/13 15");
 
-        TennisReservation.makeReservation(bookDate, 2, p1,c1);
-
-        Assert.assertEquals("false",ba.toString());
-
+        TennisReservation.makeReservation(bookDate, 1, p1,c1);
+         bookDate = dateFormat.parse("2016/11/13 16");
+         ByteArrayOutputStream ba = new ByteArrayOutputStream();
+         System.setOut(new PrintStream(ba));
+         
+        TennisReservation.makeReservation(bookDate, 1, p1,c1);
+        Assert.assertEquals("failed",ba.toString());
 
     }
 	@Test
 	public void invalid_booking_time_should_be_failed() throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh");
 		Date bookDate = dateFormat.parse("2016/12/13 15");
-        TennisReservation.makeReservation(bookDate, 1, p1,c1);
+        TennisReservation.makeReservation(bookDate, 2, p1,c1);
 
 		ByteArrayOutputStream ba = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(ba));
