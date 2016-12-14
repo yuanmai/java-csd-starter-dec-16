@@ -1,7 +1,11 @@
 package csd.starter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,19 +24,42 @@ public class User {
 		this.orderList = orderList;
 	}
 
-	public void bookCourt() {
+	public void bookCourt() throws ParseException {
 		session.serverSay("bookBegin", "please enter book info");
-		String clientInfo = session.lisClient("book");
-		String[] infoList = clientInfo.split(":");
-		if (orderList.containsKey(clientInfo)) {
-			session.serverSay("book", "This court has been booked!");
-		} else {
-			orderList.put(clientInfo, null);
-			session.serverSay("book", "you have booked " + infoList[0] + " " + infoList[1] + "!");
+		
+		session.serverSay("book.date", "please enter book date");
+		String dateStr = session.lisClient("book.date");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(dateStr);
+		if(!dateIntervalLessThan7(date)) {
+			session.serverSay("book.result", "You cannot reserver a court more than 7 days ahead");
+			return;
 		}
+		
+		session.serverSay("book.court", "please enter book court");
+		String courtName = session.lisClient("book.court");
+		Court court = new Court(courtName);
+		
+		
+//		String[] infoList = clientInfo.split(":");
+//		if (orderList.containsKey(clientInfo)) {
+//			session.serverSay("book", "This court has been booked!");
+//		} else {
+//			orderList.put(clientInfo, null);
+//			session.serverSay("book", "you have booked " + infoList[0] + " " + infoList[1] + "!");
+//		}
 
 	}
-
+	
+	private boolean dateIntervalLessThan7(Date date) {
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.add(GregorianCalendar.DAY_OF_MONTH, 7);
+		if(calendar.before(date)) {
+			return false;
+		}
+		return true;
+	}
+	
 	public void login() {
 
 		session.serverSay("name", "please enter you account:");

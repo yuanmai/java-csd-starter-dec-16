@@ -1,7 +1,9 @@
 package csd.starter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Manager {
 	private Long managerId;
@@ -13,6 +15,8 @@ public class Manager {
 		courtList.add(new Court(3l, Double.valueOf(25), "North"));
 		courtList.add(new Court(4l, Double.valueOf(15), "South"));
 	}
+	
+	private static Map<Long, Order> orderList = new HashMap<Long, Order>();
 	
 	public static List<Court> getCourtList() {
 		return courtList;
@@ -29,7 +33,7 @@ public class Manager {
 	public void setManagerId(Long managerId) {
 		this.managerId = managerId;
 	}
-
+	
 	public String getManagerName() {
 		return managerName;
 	}
@@ -37,5 +41,15 @@ public class Manager {
 	public void setManagerName(String managerName) {
 		this.managerName = managerName;
 	}
-
+	
+	public void receiverOrder(Order order) {
+		orderList.put(order.getOrderId(), order);
+	}	
+	
+	public static boolean isCourtAvailable(Order order) {
+		
+		
+		return false;
+	}
+	
 }

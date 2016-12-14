@@ -17,12 +17,16 @@ public class MainTest {
 	@Test
 	public void bookCourtTest(){
 		User user=new User();
-		user.session.getClientRecords().put("book","westCourt:moring");
+		user.session.getClientRecords().put("book.court","westCourt");
+		user.session.getClientRecords().put("book.date","2016-12-15");
+		user.session.getClientRecords().put("book.time","01");
+		user.session.getClientRecords().put("book.period","2");
 		user.bookCourt();
-		Assert.assertEquals("you have booked westCourt moring!", user.session.getServereRecords().get("book"));
-		user.session.getClientRecords().put("book","westCourt:moring");
+		Assert.assertEquals("you have booked westCourt 01,02!", user.session.getServereRecords().get("book.result"));
+		user.session.getClientRecords().put("book.court","westCourt");
+		user.session.getClientRecords().put("book.time","03,1");
 		user.bookCourt();
-		Assert.assertEquals("This court has been booked!", user.session.getServereRecords().get("book"));
+		Assert.assertEquals("max is two hours", user.session.getServereRecords().get("book.result"));
 	}
 	
 	@Test
@@ -31,5 +35,8 @@ public class MainTest {
 		String courtName = user.findNearestCourt("WenYiRoad");
 		Assert.assertEquals("WenYiRoad--East", courtName);		
 	}
+	
+	
+	
 
 }
