@@ -1,7 +1,4 @@
-package csd.starter;
-
-import csd.starter.vo.Location;
-import csd.starter.vo.Tennis;
+package csd.starter.vo;
 
 public class Geography {
 

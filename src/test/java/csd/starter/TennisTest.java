@@ -2,6 +2,7 @@ package csd.starter;
 
 import org.junit.Test;
 
+import csd.starter.vo.Geography;
 import csd.starter.vo.Location;
 import csd.starter.vo.Tennis;
 
