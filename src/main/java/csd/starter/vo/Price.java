@@ -9,6 +9,19 @@ public class Price {
     private LocalTime time;
     private Integer fee;
 
+    @Override
+    public String toString() {
+        return "Price{" +
+                "time=" + time +
+                ", fee=" + fee +
+                '}';
+    }
+
+    public Price(LocalTime time, Integer fee) {
+        this.time = time;
+        this.fee = fee;
+    }
+
     public LocalTime getTime() {
         return time;
     }

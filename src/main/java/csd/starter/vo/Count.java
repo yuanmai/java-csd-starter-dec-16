@@ -13,6 +13,19 @@ public class Count {
         this.countId = countId;
     }
 
+    public String listPrice() {
+        return priceList.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Count{" +
+                "geo=" + geo +
+                ", priceList=" + priceList +
+                ", countId=" + countId +
+                '}';
+    }
+
     public int getCountId() {
         return countId;
     }
@@ -38,4 +51,6 @@ public class Count {
     public void setPriceList(List<Price> priceList) {
         this.priceList = priceList;
     }
+
+
 }

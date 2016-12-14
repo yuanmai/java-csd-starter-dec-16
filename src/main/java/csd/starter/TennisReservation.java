@@ -1,7 +1,8 @@
 package csd.starter;
 
 import csd.starter.vo.Player;
-
+import csd.starter.vo.Reservation;
+import csd.starter.vo.Count;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -10,11 +11,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import csd.starter.vo.*;
 
 public class TennisReservation {
 	public static Map<Integer,Map> reservedList = new ConcurrentHashMap<Integer, Map>();
+	public static Map<Integer,Count> countList = new ConcurrentHashMap<Integer, Count>();
 
+	public static void setAllCounts(List<Count> counts){
+		countList.clear();
+		for(Count count : counts){
+			countList.put(count.getCountId(), count);
+		}
+	}
 	public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/mm/dd hh");
 
 	public static void makeReservation(Date bookTime, int hour, Player user, Count count){
@@ -37,7 +44,7 @@ public class TennisReservation {
 				if (reserved.get(dateFormat.format(time)) != null) {
 					return Boolean.valueOf(false);
 				}
-				time.plusHours(1);
+				time = time.plusHours(1);
 			}
 		}
 		return Boolean.valueOf(true);
@@ -53,7 +60,7 @@ public class TennisReservation {
 		for(int i = 1; i<= hour; i++){
 			Reservation reservation = new Reservation(user, time,count);
 			reservedList.get(count.getCountId()).put(dateFormat.format(time), user.getUserName() );
-			time.plusHours(1);
+			time = time.plusHours(1);
 		}
 	}
 }
