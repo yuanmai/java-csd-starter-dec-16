@@ -15,20 +15,49 @@ import static org.junit.Assert.assertEquals;
 
 public class LocationTest {
 
+//
+//    @Test
+//    public void Same_Site() {
+//    	System.out.println("Please input location 1,2,  ");
+//    	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
+//    	Location location = inputLocation(s); 
+//        assertEquals(1,Geography.lookup(location).getId());
+//    }
+    
     @Test
-    public void lambda() {
-        Function<Integer, Integer> inc = (i) -> i + 1;
+    public void Same_Site_Should_Return_Correct_Site() {
 
-        assertEquals(Integer.valueOf(3), inc.apply(2));
+    	Location location_1 = new Location(1,2);
+        assertEquals(1,Geography.lookup(location_1).getId());
+        Location location_2 = new Location(10,20);
+        assertEquals(2,Geography.lookup(location_2).getId());
+        Location location_3 = new Location(30,2);
+        assertEquals(3,Geography.lookup(location_3).getId());
+        Location location_4 = new Location(110,299);
+        assertEquals(4,Geography.lookup(location_4).getId());
     }
     
     @Test
-    public void testPod() {
-    	System.out.println("Please input location 1,2,  ");
-    	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
-    	Location location = inputLocation(s); 
-        assertEquals(1,Geography.lookup(location).getId());
+    public void Nearest_Site_Should_Return_Correct_Site() {
+
+    	Location location_1 = new Location(1,3);
+        assertEquals(1,Geography.lookup(location_1).getId());
+        Location location_2 = new Location(10,25);
+        assertEquals(9,Geography.lookup(location_2).getId());
+        Location location_3 = new Location(30,9);
+        assertEquals(3,Geography.lookup(location_3).getId());
+        Location location_4 = new Location(110,279);
+        assertEquals(4,Geography.lookup(location_4).getId());
     }
+    
+//    @Test
+//    public void Having2Nearest_Site_Should_Return_Correct_Site() {
+//
+//    	Location location_1 = new Location(20,21);
+//        assertEquals(2,Geography.lookup(location_1).getId());
+//
+//    }
+    
 //    
 //    @Test
 //    public void Same_Site() {
