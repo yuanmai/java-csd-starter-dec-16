@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
-import csd.starter.vo.Count;
+import csd.starter.vo.Court;
 import csd.starter.vo.Player;
 public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh");
@@ -16,7 +16,7 @@ public class Main {
     	String[] inputs=getInput();
     	Player p1 = new Player(inputs[0]);
     	Date bookDate = dateFormat.parse(inputs[1]);
-		Count c1 = new Count(Integer.valueOf(inputs[3]));
+		Court c1 = new Court(Integer.valueOf(inputs[3]));
 	    ByteArrayOutputStream result=setOutPut();
         TennisReservation.makeReservation(bookDate, Integer.valueOf(inputs[2]), p1,c1);
         checkResult(result);
