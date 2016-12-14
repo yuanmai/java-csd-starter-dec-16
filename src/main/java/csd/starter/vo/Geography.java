@@ -1,7 +1,8 @@
-package csd.starter;
+package csd.starter.vo;
 
-public class Reservation {
+public class Geography {
 
+	
 	//return tennis ID
 	public static Tennis lookup(Location location) {
 		// TODO Auto-generated method stub

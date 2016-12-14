@@ -1,4 +1,4 @@
-package csd.starter;
+package csd.starter.vo;
 
 import java.util.ArrayList;
 import java.util.Set;
