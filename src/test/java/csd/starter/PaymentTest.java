@@ -18,11 +18,14 @@ public class PaymentTest {
 
     private Player player = new Player("Wenjun");
     private Court court = new Court("TT");
-    private TimeRange time_range = new TimeRange(8, 2);
+    
+    private TimeRange time_range = new TimeRange(0,0);
+  
 
     @Test
     public void paymement_should_des_10_after_reserved_and_pay(){
 
+    	time_range = new TimeRange(8, 4);
         Reservation reservation = new Reservation(player, court, time_range);
         Payment payment = new Payment(player);
 
@@ -30,6 +33,21 @@ public class PaymentTest {
         payment.pay(reservation);
 
         assertEquals(20, pa - payment.account());
+
+    }
+    
+
+    @Test
+    public void paymement_with_various_feerates(){
+
+    	time_range = new TimeRange(8, 6);
+        Reservation reservation = new Reservation(player, court, time_range);
+        Payment payment = new Payment(player);
+
+        int pa = payment.account();
+        payment.pay(reservation);
+
+        assertEquals(70, pa - payment.account());
 
     }
 }
