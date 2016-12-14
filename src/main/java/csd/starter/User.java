@@ -5,15 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
 
 public class User {
 	private String name;
 	private String pw;
 	public UserSession session = new UserSession();
 	private Map<String, String> orderList = new HashMap<String, String>();
-	
 
 	public Map<String, String> getOrderList() {
 		return orderList;
@@ -23,57 +20,41 @@ public class User {
 		this.orderList = orderList;
 	}
 
-	public void bookCourt(){
-		
-		String serverInfo = session.getClientRecords().get("book");
-		String[] infoList = serverInfo.split(":"); 
-		if(orderList.containsKey(serverInfo)){
+	public void bookCourt() {
+		session.serverSay("bookBegin", "please enter book info");
+		String clientInfo = session.lisClient("book");
+		String[] infoList = clientInfo.split(":");
+		if (orderList.containsKey(clientInfo)) {
 			session.serverSay("book", "This court has been booked!");
+		} else {
+			orderList.put(clientInfo, null);
+			session.serverSay("book", "you have booked " + infoList[0] + " " + infoList[1] + "!");
 		}
-		else{
-			orderList.put(serverInfo, null);
-			session.serverSay("book", "you have booked " + infoList[0] + " " + infoList[1]+"!");
-		}
-		
+
 	}
-	
+
 	public void login() {
-		Scanner scan = new Scanner(System.in);
 
 		session.serverSay("name", "please enter you account:");
-
-		if(session.getClientRecords().containsKey("name")){
-			name=session.getClientRecords().get("name");
-			session.clientSay("name", name);
-		}else{
-			name = scan.nextLine();
-		}
-
+		name = session.lisClient("name");
 
 		session.serverSay("pw", "please enter you passward:");
-
-		if(session.getClientRecords().containsKey("pw")){
-			pw=session.getClientRecords().get("pw");
-			session.clientSay("pw", pw);
-		}else{
-			pw = scan.nextLine();
-		}
+		pw = session.lisClient("pw");
 
 		session.serverSay("loginResult", name + " on line!");
-		scan.close();
+
 	}
-	
-	public String findNearestCourt(String location){
-		
+
+	public String findNearestCourt(String location) {
+
 		List<String> locationList = new ArrayList<>();
-		for(Court court : Manager.getCourtList()){
+		for (Court court : Manager.getCourtList()) {
 			locationList.add(location + "--" + court.getLocation());
 		}
 		Collections.sort(locationList);
 		System.out.println(locationList.get(0));
 		return locationList.get(0);
 	}
-
 
 	public String getName() {
 		return name;
@@ -89,6 +70,16 @@ public class User {
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+
+	public void onLine() {
+		this.login();
+		session.serverSay("afterLoginAndAsk", "what do you want to do?");
+		if(session.lisClient("afterLoginAndAsk").equalsIgnoreCase("book")){
+			this.bookCourt();
+		}
+		
+		
 	}
 
 }

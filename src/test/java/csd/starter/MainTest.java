@@ -26,7 +26,7 @@ public class MainTest {
 	}
 	
 	@Test
-	public void testFindNearestCourt(){		
+	public void findNearestCourtTest(){		
 		User user=new User();
 		String courtName = user.findNearestCourt("WenYiRoad");
 		Assert.assertEquals("WenYiRoad--East", courtName);		
