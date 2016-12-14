@@ -21,6 +21,11 @@ public class Payment {
         if (reservation == null)
             throw new Exception();
 
-        account -= reservation.fee();
+        if (reservation.isSuccessful()){
+            account -= reservation.fee();
+        }
+
+
+
     }
 }

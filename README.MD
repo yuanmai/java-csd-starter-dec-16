@@ -33,3 +33,8 @@ customer: player
 
 FeeRate table
 
+8 - 12 AM: 5 $/ hour
+13 - 17 PM: 10$/ hour
+
+18 - 22 PM: 20 $/ hour
+

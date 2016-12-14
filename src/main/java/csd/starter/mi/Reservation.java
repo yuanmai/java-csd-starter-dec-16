@@ -1,6 +1,7 @@
 package csd.starter.mi;
 
 import csd.starter.ppt.Court;
+import csd.starter.ppt.FeeRateLookUp;
 import csd.starter.ppt.Player;
 import csd.starter.ppt.TimeRange;
 
@@ -19,7 +20,19 @@ public class Reservation {
         this.time_range = time_range;
     }
 
-    public Integer fee() {
-        return 10 * time_range.getInt();
+    public int fee() {
+    	int start = time_range.getStart();
+    	int duration = time_range.getDuration();
+    	int fee = 0;
+    	int j = start;
+    	for(int i = 0; i < duration; i ++){
+    		fee += FeeRateLookUp.feeRates[j];
+    		j++;
+    	}
+        return fee;
+    }
+
+    public boolean isSuccessful() {
+        return time_range.getDuration() <= 2;
     }
 }

@@ -12,7 +12,10 @@ public class TimeRange {
         this.duration = duration;
     }
 
-    public int getInt() {
+    public int getDuration() {
         return duration;
+    }
+    public int getStart(){
+    	return start;
     }
 }
