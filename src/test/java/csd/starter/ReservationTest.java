@@ -32,26 +32,60 @@ public class ReservationTest {
 	public void available_booking_time_should_be_success() throws ParseException {
 		ByteArrayOutputStream ba = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(ba));
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh");
-		Date bookDate = dateFormat.parse("2016/12/13 15");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh");
+		Date bookDate = dateFormat.parse("2016/12/14 15");
 
         TennisReservation.makeReservation(bookDate, 2, p1,c1);
 
         Assert.assertEquals("success",ba.toString());
-
-
 	}
+    @Test
+    public void booking_time_should_less_than_two_hours() throws ParseException {
+        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(ba));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh");
+        Date bookDate = dateFormat.parse("2016/12/13 15");
 
+        TennisReservation.makeReservation(bookDate, 3, p1,c1);
+
+        Assert.assertEquals("failed",ba.toString());
+    }
+
+    @Test
+    public void booking_time_should_less_than_seven_days() throws ParseException {
+        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(ba));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh");
+        Date bookDate = dateFormat.parse("2016/12/25 15");
+
+        TennisReservation.makeReservation(bookDate, 2, p1,c1);
+
+        Assert.assertEquals("failed",ba.toString());
+    }
+
+    @Test
+    public void one_should_only_book_one_court_per_day() throws ParseException {
+        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(ba));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh");
+        Date bookDate = dateFormat.parse("2016/12/25 15");
+
+        TennisReservation.makeReservation(bookDate, 2, p1,c1);
+
+        Assert.assertEquals("false",ba.toString());
+
+
+    }
 	@Test
 	public void invalid_booking_time_should_be_failed() throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh");
 		Date bookDate = dateFormat.parse("2016/12/13 15");
-        TennisReservation.makeReservation(bookDate, 2, p1,c1);
+        TennisReservation.makeReservation(bookDate, 1, p1,c1);
 
 		ByteArrayOutputStream ba = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(ba));
 		bookDate = dateFormat.parse("2016/12/13 16");
-		TennisReservation.makeReservation(bookDate, 2, p2,c1);
+		TennisReservation.makeReservation(bookDate, 1, p2,c1);
 
 
 		Assert.assertEquals("failed",ba.toString());

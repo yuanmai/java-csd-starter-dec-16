@@ -26,17 +26,23 @@ public class TennisReservation {
 	public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/mm/dd hh");
 
 	public static void makeReservation(Date bookTime, int hour, Player user, Court court){
-		if(isAvaliable(bookTime, hour, court)){
+		if(isAvailable(bookTime, hour, court)){
 			reservation(bookTime, hour, user, court);
 			System.out.print("success");
 		}else{
 			System.out.print("failed");
 		}
 	}
-	
-	public static boolean isAvaliable(Date bookTime, int hour,  Court court){
-		LocalDateTime time = LocalDateTime.ofInstant(bookTime.toInstant(), ZoneId.systemDefault());
 
+	public static boolean isAvailable(Date bookTime, int hour,  Court court){
+		LocalDateTime time = LocalDateTime.ofInstant(bookTime.toInstant(), ZoneId.systemDefault());
+		if(hour > 2){
+			return Boolean.valueOf(false);
+		}
+
+		if(time.minusDays(7).isAfter(LocalDateTime.now())){
+			return Boolean.valueOf(false);
+		}
 		if(! reservedList.containsKey(court.getCountId())){
 			return Boolean.valueOf(true);
 		}else {
