@@ -3,6 +3,7 @@ package csd.starter;
 import org.junit.Before;
 
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 
 import csd.starter.vo.Geography;
 import csd.starter.vo.Location;
@@ -22,9 +23,8 @@ public class GeographyTest {
 //    	Location location = inputLocation(s); 
 //        assertEquals(1,Geography.lookup(location).getId());
 //    }
-    
     @Test
-    public void Same_Site_Should_Return_Correct_Site() {
+    public void same_site_should_return_itself() {
 
     	Location location_1 = new Location(1,2);
         assertEquals(1,Geography.lookup(location_1).getId());
@@ -37,7 +37,7 @@ public class GeographyTest {
     }
     
     @Test
-    public void Nearest_Site_Should_Return_Correct_Site() {
+    public void find_nearest_site() {
 
     	Location location_1 = new Location(1,3);
         assertEquals(1,Geography.lookup(location_1).getId());
@@ -84,16 +84,14 @@ public class GeographyTest {
 //    }
 //    
 //    
-	public static Location inputLocation(Scanner s) {
-		
-		int x = s.nextInt();
-        int y = s.nextInt();
-        Location location = new Location(x,y);
-        System.out.println(location.getX());
-        System.out.println(location.getY());
-        s.close();
-        return location;
-	}
+    @Test
+    public void user_can_input_location(){
+    	Tennis tennis = Geography.userSearchTennnis();
+    	assertEquals(1,tennis.getId());
+    }
+	
+	
+
 	@Before
 	public void initial(){
 		Tennis.getTennisAssembly().add(new Tennis(1,new Location(1,2)));
