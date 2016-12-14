@@ -25,13 +25,13 @@ public class FeerateTester {
 
     }
 
-    @Test
-    public void uat(){
-        ByteArrayOutputStream ba = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(ba));
-        Main.e2e(new ByteArrayInputStream("8".getBytes()));
-        Assert.assertEquals("5\n", ba.toString());
-    }
+//    @Test
+//    public void uat(){
+//        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+//        System.setOut(new PrintStream(ba));
+//        Main.e2e(new ByteArrayInputStream("8".getBytes()));
+//        Assert.assertEquals("5\n", ba.toString());
+//    }
 
 
 }
