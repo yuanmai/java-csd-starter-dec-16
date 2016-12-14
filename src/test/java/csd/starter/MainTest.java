@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import javax.xml.stream.Location;
+
 import static org.junit.Assert.assertEquals;
 
 public class MainTest {
@@ -16,10 +18,6 @@ public class MainTest {
         Function<Integer, Integer> inc = (i) -> i + 1;
 
         assertEquals(Integer.valueOf(3), inc.apply(2));
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'team-c' of https://github.com/yuanmai/java-csd-starter-dec-16
     }
     
     @Test

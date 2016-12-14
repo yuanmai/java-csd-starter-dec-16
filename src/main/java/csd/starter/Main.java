@@ -1,6 +1,5 @@
 package csd.starter;
 
-<<<<<<< HEAD
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +9,6 @@ import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> branch 'team-c' of https://github.com/yuanmai/java-csd-starter-dec-16
 
 public class Main {
 
