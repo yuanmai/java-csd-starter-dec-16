@@ -13,20 +13,16 @@ public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh");
 
     public static void main(String[] args) throws ParseException {
-    	bookSuccess();
-        //printResult(result);
-    }
-
-    public static void bookSuccess() throws ParseException{
     	String[] inputs=getInput();
     	Player p1 = new Player(inputs[0]);
     	Date bookDate = dateFormat.parse(inputs[1]);
 		Count c1 = new Count(Integer.valueOf(inputs[3]));
-		ByteArrayOutputStream result=setOutPut();
+	    ByteArrayOutputStream result=setOutPut();
         TennisReservation.makeReservation(bookDate, Integer.valueOf(inputs[2]), p1,c1);
-        printResult(result);
+        checkResult(result);
     }
-	private static void printResult(ByteArrayOutputStream result) {
+    
+	private static void checkResult(ByteArrayOutputStream result) {
 		assertEquals("success",result.toString());	
 	}
 
