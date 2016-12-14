@@ -1,7 +1,11 @@
 package csd.starter;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 public class User {
@@ -57,6 +61,17 @@ public class User {
 
 		session.serverSay("loginResult", name + " on line!");
 		scan.close();
+	}
+	
+	public String findNearestCourt(String location){
+		
+		List<String> locationList = new ArrayList<>();
+		for(Court court : Manager.getCourtList()){
+			locationList.add(location + "--" + court.getLocation());
+		}
+		Collections.sort(locationList);
+		System.out.println(locationList.get(0));
+		return locationList.get(0);
 	}
 
 

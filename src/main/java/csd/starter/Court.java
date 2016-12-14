@@ -1,14 +1,19 @@
 package csd.starter;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Court {
 	private Long courtId;
 	private Double price;
 	private String location;
+	
+	public Court(Long courtId, Double price, String location){
+		this.courtId = courtId;
+		this.price = price;
+		this.location = location;
+	}	
+	
 	public String getLocation() {
 		return location;
 	}

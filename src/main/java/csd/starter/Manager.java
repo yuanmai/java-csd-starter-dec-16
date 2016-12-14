@@ -1,19 +1,25 @@
 package csd.starter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Manager {
 	private Long managerId;
 	private String managerName;
-	private Map<Long, Court> courtList = new HashMap<Long, Court>();
-
-	public Map<Long, Court> getCourtList() {
+	private static List<Court> courtList = new ArrayList<Court>();
+	static{
+		courtList.add(new Court(1l, Double.valueOf(20), "East"));
+		courtList.add(new Court(2l, Double.valueOf(30), "West"));
+		courtList.add(new Court(3l, Double.valueOf(25), "North"));
+		courtList.add(new Court(4l, Double.valueOf(15), "South"));
+	}
+	
+	public static List<Court> getCourtList() {
 		return courtList;
 	}
 
-	public void setCourtList(Map<Long, Court> courtList) {
-		this.courtList = courtList;
+	public static void setCourtList(List<Court> courtList) {
+		Manager.courtList = courtList;
 	}
 
 	public Long getManagerId() {

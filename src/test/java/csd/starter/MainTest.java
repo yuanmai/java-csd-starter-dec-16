@@ -1,10 +1,6 @@
 package csd.starter;
 
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Assert;
 
 public class MainTest {
@@ -27,6 +23,13 @@ public class MainTest {
 		user.session.getClientRecords().put("book","westCourt:moring");
 		user.bookCourt();
 		Assert.assertEquals("This court has been booked!", user.session.getServereRecords().get("book"));
+	}
+	
+	@Test
+	public void testFindNearestCourt(){		
+		User user=new User();
+		String courtName = user.findNearestCourt("WenYiRoad");
+		Assert.assertEquals("WenYiRoad--East", courtName);		
 	}
 
 }
