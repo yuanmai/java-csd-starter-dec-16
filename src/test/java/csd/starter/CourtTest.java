@@ -1,21 +1,20 @@
 package csd.starter;
 
-import csd.starter.vo.Count;
+import csd.starter.vo.Court;
 import csd.starter.vo.Price;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by shushuxu on 2016/12/14.
  */
-public class CountTest {
+public class CourtTest {
 
-    Count c1 = new Count(1);
+    Court c1 = new Court(1);
 
     @Test
     public void count_fee_should_be_display_by_hour(){

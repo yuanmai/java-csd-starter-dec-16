@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 public class Reservation {
     private Player user;
     private LocalDateTime bookTime;
-    private Count count;
+    private Court court;
 
-    public Reservation(Player user, LocalDateTime bookTime, Count count) {
+    public Reservation(Player user, LocalDateTime bookTime, Court court) {
         this.user = user;
         this.bookTime = bookTime;
-        this.count = count;
+        this.court = court;
     }
 
     public LocalDateTime getBookTime() {
@@ -23,12 +23,12 @@ public class Reservation {
     public void setBookTime(LocalDateTime bookTime) {
         this.bookTime = bookTime;
     }
-    public Count getCount() {
-        return count;
+    public Court getCourt() {
+        return court;
     }
 
-    public void setCount(Count count) {
-        this.count = count;
+    public void setCourt(Court court) {
+        this.court = court;
     }
 
     public Player getUser() {
