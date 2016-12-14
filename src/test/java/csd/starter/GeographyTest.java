@@ -9,11 +9,10 @@ import csd.starter.vo.Location;
 import csd.starter.vo.Tennis;
 
 import java.util.Scanner;
-import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public class LocationTest {
+public class GeographyTest {
 
 //
 //    @Test
