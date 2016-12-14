@@ -1,5 +1,8 @@
 package csd.starter;
 
+import csd.starter.vo.Location;
+import csd.starter.vo.Tennis;
+
 public class Geography {
 
 	//return tennis ID

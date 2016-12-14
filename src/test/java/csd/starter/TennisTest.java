@@ -2,6 +2,9 @@ package csd.starter;
 
 import org.junit.Test;
 
+import csd.starter.vo.Location;
+import csd.starter.vo.Tennis;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -25,7 +28,7 @@ public class TennisTest {
     	System.out.println("Please input location x,y,  ");
     	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
     	Location location = inputLocation(s); 
-        assertEquals(1,Reservation.lookup(location).getId());
+        assertEquals(1,Geography.lookup(location).getId());
 
     }
 	public static Location inputLocation(Scanner s) {

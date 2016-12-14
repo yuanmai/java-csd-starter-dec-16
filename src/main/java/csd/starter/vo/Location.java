@@ -1,4 +1,4 @@
-package csd.starter;
+package csd.starter.vo;
 
 public class Location {
 	private int x;

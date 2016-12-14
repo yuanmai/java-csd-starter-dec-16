@@ -6,12 +6,12 @@ import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import csd.starter.vo.Count;
 import csd.starter.vo.Player;
-import org.junit.Assert;
-import org.junit.Test;
 
 
 /**
@@ -35,8 +35,7 @@ public class ReservationTest {
             TennisReservation.makeReservation(bookDate, 2, p1,c1);
 			Assert.assertEquals("success",ba.toString());
 
-					} catch (ParseException e) {
-			// TODO Auto-generated catch block
+        } catch (ParseException e) {
 			e.printStackTrace();
 		}
 	    
