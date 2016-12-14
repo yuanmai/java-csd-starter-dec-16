@@ -16,7 +16,6 @@ public class MainTest {
         Function<Integer, Integer> inc = (i) -> i + 1;
 
         assertEquals(Integer.valueOf(3), inc.apply(2));
-
     }
     
     @Test
