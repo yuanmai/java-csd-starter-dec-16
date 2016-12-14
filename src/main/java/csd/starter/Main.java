@@ -17,8 +17,11 @@ public class Main {
     	Player p1 = new Player(inputs[0]);
     	Date bookDate = dateFormat.parse(inputs[1]);
 		Court c1 = new Court(Integer.valueOf(inputs[3]));
+		
 	    ByteArrayOutputStream result=setOutPut();
+	    
         TennisReservation.makeReservation(bookDate, Integer.valueOf(inputs[2]), p1,c1);
+        
         checkResult(result);
     }
     
