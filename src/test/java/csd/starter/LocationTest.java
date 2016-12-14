@@ -1,19 +1,19 @@
 package csd.starter;
 
+import org.junit.Before;
+
 import org.junit.Test;
 
 import csd.starter.vo.Geography;
 import csd.starter.vo.Location;
 import csd.starter.vo.Tennis;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public class TennisTest {
+public class LocationTest {
 
     @Test
     public void lambda() {
@@ -24,25 +24,50 @@ public class TennisTest {
     
     @Test
     public void testPod() {
-
-    	init();
-    	System.out.println("Please input location x,y,  ");
+    	System.out.println("Please input location 1,2,  ");
     	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
     	Location location = inputLocation(s); 
         assertEquals(1,Geography.lookup(location).getId());
-
     }
+//    
+//    @Test
+//    public void Same_Site() {
+//    	System.out.println("Please input location x,y,  ");
+//    	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
+//    	Location location = inputLocation(s); 
+//        assertEquals(1,Geography.lookup(location).getId());
+//
+//    }
+//    @Test
+//    public void testPod() {
+//    	System.out.println("Please input location x,y,  ");
+//    	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
+//    	Location location = inputLocation(s); 
+//        assertEquals(1,Geography.lookup(location).getId());
+//
+//    }
+//    @Test
+//    public void testPod() {
+//    	System.out.println("Please input location x,y,  ");
+//    	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
+//    	Location location = inputLocation(s); 
+//        assertEquals(1,Geography.lookup(location).getId());
+//
+//    }
+//    
+//    
 	public static Location inputLocation(Scanner s) {
 		
 		int x = s.nextInt();
         int y = s.nextInt();
         Location location = new Location(x,y);
-//        System.out.println(location.get(0));
-//        System.out.println(location.get(1));
+        System.out.println(location.getX());
+        System.out.println(location.getY());
         s.close();
         return location;
 	}
-	public void init(){
+	@Before
+	public void initial(){
 		Tennis.getTennisAssembly().add(new Tennis(1,new Location(1,2)));
 		Tennis.getTennisAssembly().add(new Tennis(2,new Location(10,20)));
 		Tennis.getTennisAssembly().add(new Tennis(3,new Location(30,2)));
