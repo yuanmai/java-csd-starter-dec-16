@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public class MainTest {
+public class TennisTest {
 
     @Test
     public void lambda() {
