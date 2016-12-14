@@ -1,8 +1,9 @@
 package csd.starter;
 
+import csd.starter.vo.Court;
 import csd.starter.vo.Player;
 import csd.starter.vo.Reservation;
-import csd.starter.vo.Count;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -14,32 +15,32 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TennisReservation {
 	public static Map<Integer,Map> reservedList = new ConcurrentHashMap<Integer, Map>();
-	public static Map<Integer,Count> countList = new ConcurrentHashMap<Integer, Count>();
+	public static Map<Integer,Court> countList = new ConcurrentHashMap<Integer, Court>();
 
-	public static void setAllCounts(List<Count> counts){
+	public static void setAllCounts(List<Court> courts){
 		countList.clear();
-		for(Count count : counts){
-			countList.put(count.getCountId(), count);
+		for(Court court : courts){
+			countList.put(court.getCountId(), court);
 		}
 	}
 	public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/mm/dd hh");
 
-	public static void makeReservation(Date bookTime, int hour, Player user, Count count){
-		if(isAvaliable(bookTime, hour, count)){
-			reservation(bookTime, hour, user, count);
+	public static void makeReservation(Date bookTime, int hour, Player user, Court court){
+		if(isAvaliable(bookTime, hour, court)){
+			reservation(bookTime, hour, user, court);
 			System.out.print("success");
 		}else{
 			System.out.print("failed");
 		}
 	}
 	
-	public static boolean isAvaliable(Date bookTime, int hour,  Count count){
+	public static boolean isAvaliable(Date bookTime, int hour,  Court court){
 		LocalDateTime time = LocalDateTime.ofInstant(bookTime.toInstant(), ZoneId.systemDefault());
 
-		if(! reservedList.containsKey(count.getCountId())){
+		if(! reservedList.containsKey(court.getCountId())){
 			return Boolean.valueOf(true);
 		}else {
-			Map<String, Reservation> reserved = reservedList.get(count.getCountId());
+			Map<String, Reservation> reserved = reservedList.get(court.getCountId());
 			for (int i = 1; i <= hour; i++) {
 				if (reserved.get(dateFormat.format(time)) != null) {
 					return Boolean.valueOf(false);
@@ -50,16 +51,16 @@ public class TennisReservation {
 		return Boolean.valueOf(true);
 	}
 	
-	public static void reservation(Date bookTime, int hour, Player user,  Count count){
+	public static void reservation(Date bookTime, int hour, Player user,  Court court){
 		LocalDateTime time = LocalDateTime.ofInstant(bookTime.toInstant(), ZoneId.systemDefault());
 
-		if(! reservedList.containsKey(count.getCountId())) {
-			reservedList.put(count.getCountId(), new ConcurrentHashMap<String, Reservation>());
+		if(! reservedList.containsKey(court.getCountId())) {
+			reservedList.put(court.getCountId(), new ConcurrentHashMap<String, Reservation>());
 		}
 
 		for(int i = 1; i<= hour; i++){
-			Reservation reservation = new Reservation(user, time,count);
-			reservedList.get(count.getCountId()).put(dateFormat.format(time), user.getUserName() );
+			Reservation reservation = new Reservation(user, time, court);
+			reservedList.get(court.getCountId()).put(dateFormat.format(time), user.getUserName() );
 			time = time.plusHours(1);
 		}
 	}

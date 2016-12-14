@@ -1,23 +1,24 @@
 package csd.starter.vo;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Geography {
 
-	public static Tennis userSearchTennnis(){
+	public static Court userSearchTennnis(List<Court> courts){
     	System.out.println("Please input location, format: 1,2,  ");
     	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
     	Location location = inputLocation(s);
-    	return lookup(location);
+    	return lookup(location, courts);
     	
 	}
 	//return tennis ID
-	public static Tennis lookup(Location location) {
+	public static Court lookup(Location location, List<Court> courts) {
 		// TODO Auto-generated method stub
-		Tennis nearestTennis = Tennis.getTennisAssembly().get(1);
+		Court nearestTennis = courts.get(1);
 		int distance = distance(nearestTennis.getLocation(), location);
 
-		for (Tennis tennis : Tennis.getTennisAssembly()){
+		for (Court tennis : courts){
 			if (distance(tennis.getLocation(), location) < distance){
 				nearestTennis = tennis;
 				distance = distance(tennis.getLocation(), location);
