@@ -16,7 +16,11 @@ public class Payment {
 
     }
 
-    public void pay(Reservation reservation) {
+    public void pay(Reservation reservation) throws Exception {
+
+        if (reservation == null)
+            throw new Exception();
+
         account -= reservation.fee();
     }
 }

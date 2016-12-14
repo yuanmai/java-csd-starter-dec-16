@@ -21,7 +21,7 @@ public class PaymentTest {
     private TimeRange time_range = new TimeRange(8, 2);
 
     @Test
-    public void paymement_should_des_10_after_reserved_and_pay(){
+    public void paymement_should_des_10_after_reserved_and_pay() throws Exception {
 
         Reservation reservation = new Reservation(player, court, time_range);
         Payment payment = new Payment(player);
@@ -31,5 +31,12 @@ public class PaymentTest {
 
         assertEquals(20, pa - payment.account());
 
+    }
+
+    @Test(expected = Exception.class)
+    public void payment_should_throw_exception_after_without_reserved_and_continue_pay() throws Exception {
+
+        Payment payment = new Payment(player);
+        payment.pay(null);
     }
 }
