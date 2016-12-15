@@ -29,38 +29,32 @@ public class ReservationTest {
 		ba= new ByteArrayOutputStream();
 		System.setOut(new PrintStream(ba));
 	}
-	@Test
-	public void add_one_count_size_should_be_one() {
-		TennisReservation.setAllCounts(Arrays.asList(c1));
-
-		Assert.assertEquals(1, TennisReservation.countList.size());
-	}
 
 	@Test
 	public void available_booking_time_should_be_success() throws ParseException {
 		Date bookDate = dateFormat.parse("2016/12/14 15");
 
-		TennisReservation.makeReservation(bookDate, 2, p1, c1);
-
-		Assert.assertEquals("success", ba.toString());
+		boolean result=TennisReservation.makeReservation(bookDate, 2, p1, c1);
+	
+		Assert.assertTrue("success", result);
 	}
 
 	@Test
 	public void booking_time_should_less_than_two_hours() throws ParseException {
 		Date bookDate = dateFormat.parse("2016/12/13 15");
 
-		TennisReservation.makeReservation(bookDate, 3, p1, c1);
+		boolean result=TennisReservation.makeReservation(bookDate, 3, p1, c1);
 
-		Assert.assertEquals("failed", ba.toString());
+		Assert.assertTrue(!result);
 	}
 
 	@Test
 	public void booking_time_should_less_than_seven_days() throws ParseException {
 		Date bookDate = dateFormat.parse("2016/12/25 15");
 
-		TennisReservation.makeReservation(bookDate, 2, p1, c1);
+		boolean result=TennisReservation.makeReservation(bookDate, 2, p1, c1);
 
-		Assert.assertEquals("failed", ba.toString());
+		Assert.assertTrue(! result);
 	}
 
 	@Test
@@ -70,8 +64,8 @@ public class ReservationTest {
 		TennisReservation.makeReservation(bookDate, 1, p1, c1);
 		bookDate = dateFormat.parse("2016/11/13 16");
 
-		TennisReservation.makeReservation(bookDate, 1, p1, c1);
-		Assert.assertEquals("successfailed", ba.toString());
+		boolean result= TennisReservation.makeReservation(bookDate, 1, p1, c1);
+		Assert.assertTrue(!result);
 
 	}
 
@@ -82,8 +76,9 @@ public class ReservationTest {
 		TennisReservation.makeReservation(bookDate, 2, p1, c1);
 
 		bookDate = dateFormat.parse("2016/12/13 16");
-		TennisReservation.makeReservation(bookDate, 1, p2, c1);
+		boolean result= TennisReservation.makeReservation(bookDate, 1, p2, c1);
 
-		Assert.assertEquals("successfailed", ba.toString());
+		Assert.assertTrue(!result);
+
 	}
 }
