@@ -29,8 +29,11 @@ public class User {
 		
 		session.serverSay("book.date", "please enter book date");
 		String dateStr = session.lisClient("book.date");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(dateStr);
+        session.serverSay("book.time", "please enter book time");
+        String time = session.lisClient("book.time");
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+		Date date = sdf.parse(dateStr + " " + time);
 		if(!dateIntervalLessThan7(date)) {
 			session.serverSay("book.result", "You cannot reserver a court more than 7 days ahead");
 			return;
@@ -39,8 +42,13 @@ public class User {
 		session.serverSay("book.court", "please enter book court");
 		String courtName = session.lisClient("book.court");
 		Court court = new Court(courtName);
-		
-		
+
+        session.serverSay("book.period", "please enter book period(in hours)");
+        String periodStr = session.lisClient("book.period");
+        if(Integer.valueOf(periodStr) > 2) {
+            session.serverSay("book.period", "You cannot reserver a court for more than 2 hours");
+            return;
+        }
 //		String[] infoList = clientInfo.split(":");
 //		if (orderList.containsKey(clientInfo)) {
 //			session.serverSay("book", "This court has been booked!");
@@ -76,7 +84,7 @@ public class User {
 
 		List<String> locationList = new ArrayList<>();
 		for (Court court : Manager.getCourtList()) {
-			locationList.add(location + "--" + court.getLocation());
+			locationList.add(location + "--" + court.getCourtName());
 		}
 		Collections.sort(locationList);
 		System.out.println(locationList.get(0));
@@ -103,7 +111,12 @@ public class User {
 		this.login();
 		session.serverSay("afterLoginAndAsk", "what do you want to do?");
 		if(session.lisClient("afterLoginAndAsk").equalsIgnoreCase("book")){
-			this.bookCourt();
+		    try {
+                this.bookCourt();
+            } catch (Exception e) {
+		        e.printStackTrace();
+            }
+
 		}
 		
 		
