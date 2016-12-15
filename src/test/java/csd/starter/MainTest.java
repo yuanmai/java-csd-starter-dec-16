@@ -15,7 +15,18 @@ public class MainTest {
 		user.login();
 		Assert.assertEquals("xiepengqi on line!", user.session.getServereRecords().get("loginResult"));
 	}
-	
+
+	@Test
+    public void bookCourtSucceeded() throws ParseException {
+        User user=new User();
+        user.session.getClientRecords().put("book.court","westCourt");
+        user.session.getClientRecords().put("book.date","2016-12-18");
+        user.session.getClientRecords().put("book.time","08");
+        user.session.getClientRecords().put("book.period","1");
+        user.bookCourt();
+        Assert.assertEquals("Booked successfully", user.session.getServereRecords().get("book.result"));
+    }
+
 	@Test
 	public void bookCourtTestMoreThan2Hours() throws ParseException {
 		User user=new User();

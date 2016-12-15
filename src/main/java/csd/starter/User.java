@@ -40,13 +40,20 @@ public class User {
 		}
 
 		session.serverSay("book.court", "please enter book court");
+        String courtName = session.lisClient("book.court");
+        Court court = new Court(courtName);
+
 		session.serverSay("book.period", "please enter book period(in hours)");
 		String periodStr = session.lisClient("book.period");
-		if (Integer.valueOf(periodStr) > 2) {
+		int period = Integer.valueOf(periodStr);
+		if (period > 2) {
 			session.serverSay("book.result", "You cannot reserver a court for more than 2 hours");
 			return;
 		}
 
+		Order order = new Order(name, date, period, court);
+        session.serverSay("book.result", "Booked successfully");
+		System.out.println(order);
 	}
 
 	private boolean dateIntervalLessThan7(Date date) {
