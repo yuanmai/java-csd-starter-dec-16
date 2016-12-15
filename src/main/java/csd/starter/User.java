@@ -13,8 +13,8 @@ import java.util.Map;
 public class User {
 	private String name;
 	private String pw;
-	public UserSession session = new UserSession();
-	private Map<String, String> orderList = new HashMap<String, String>();
+	public static final UserSession session = new UserSession();
+	private Map<String, String> orderList = new HashMap();
 
 	public Map<String, String> getOrderList() {
 		return orderList;
@@ -26,44 +26,41 @@ public class User {
 
 	public void bookCourt() throws ParseException {
 		session.serverSay("bookBegin", "please enter book info");
-		
+
 		session.serverSay("book.date", "please enter book date");
 		String dateStr = session.lisClient("book.date");
-        session.serverSay("book.time", "please enter book time");
-        String time = session.lisClient("book.time");
+		session.serverSay("book.time", "please enter book time");
+		String time = session.lisClient("book.time");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
 		Date date = sdf.parse(dateStr + " " + time);
-		if(!dateIntervalLessThan7(date)) {
+		if (!dateIntervalLessThan7(date)) {
 			session.serverSay("book.result", "You cannot reserver a court more than 7 days ahead");
 			return;
 		}
-		
-		session.serverSay("book.court", "please enter book court");
-		String courtName = session.lisClient("book.court");
-		Court court = new Court(courtName);
 
-        session.serverSay("book.period", "please enter book period(in hours)");
-        String periodStr = session.lisClient("book.period");
-        if(Integer.valueOf(periodStr) > 2) {
-            session.serverSay("book.result", "You cannot reserver a court for more than 2 hours");
-            return;
-        }
+		session.serverSay("book.court", "please enter book court");
+		session.serverSay("book.period", "please enter book period(in hours)");
+		String periodStr = session.lisClient("book.period");
+		if (Integer.valueOf(periodStr) > 2) {
+			session.serverSay("book.result", "You cannot reserver a court for more than 2 hours");
+			return;
+		}
 
 	}
-	
+
 	private boolean dateIntervalLessThan7(Date date) {
 		GregorianCalendar now = new GregorianCalendar();
-        now.add(GregorianCalendar.DAY_OF_MONTH, 7);
+		now.add(GregorianCalendar.DAY_OF_MONTH, 7);
 
 		GregorianCalendar expected = new GregorianCalendar();
 		expected.setTime(date);
-		if(now.before(expected)) {
+		if (now.before(expected)) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public void login() {
 
 		session.serverSay("name", "please enter you account:");
@@ -83,7 +80,6 @@ public class User {
 			locationList.add(location + "--" + court.getCourtName());
 		}
 		Collections.sort(locationList);
-		System.out.println(locationList.get(0));
 		return locationList.get(0);
 	}
 
@@ -103,19 +99,18 @@ public class User {
 		this.pw = pw;
 	}
 
-	public void onLine() {
+	public void onLine() throws ParseException {
 		this.login();
 		session.serverSay("afterLoginAndAsk", "what do you want to do?");
-		if(session.lisClient("afterLoginAndAsk").equalsIgnoreCase("book")){
-		    try {
-                this.bookCourt();
-            } catch (Exception e) {
-		        e.printStackTrace();
-            }
+		if ("book".equalsIgnoreCase(session.lisClient("afterLoginAndAsk"))) {
+			try {
+				this.bookCourt();
+			} catch (ParseException e) {
+				throw e;
+			}
 
 		}
-		
-		
+
 	}
 
 }
