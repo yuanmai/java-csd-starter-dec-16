@@ -8,7 +8,7 @@ import java.util.Map;
 public class Manager {
 	private Long managerId;
 	private String managerName;
-	private static List<Court> courtList = new ArrayList<Court>();
+	private static List<Court> courtList = new ArrayList();
 	static{
 		courtList.add(new Court("East"));
 		courtList.add(new Court("West"));
@@ -16,7 +16,7 @@ public class Manager {
 		courtList.add(new Court("South"));
 	}
 	
-	private static Map<Long, Order> orderList = new HashMap<Long, Order>();
+	private static Map<Long, Order> orderList = new HashMap();
 	
 	public static List<Court> getCourtList() {
 		return courtList;
@@ -45,11 +45,5 @@ public class Manager {
 	public void receiverOrder(Order order) {
 		orderList.put(order.getOrderId(), order);
 	}	
-	
-	public static boolean isCourtAvailable(Order order) {
-		
-		
-		return false;
-	}
-	
+
 }

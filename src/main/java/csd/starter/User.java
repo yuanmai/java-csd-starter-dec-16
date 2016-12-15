@@ -35,25 +35,21 @@ public class User {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
 		Date date = sdf.parse(dateStr + " " + time);
 		if (!dateIntervalLessThan7(date)) {
-			session.serverSay("book.result", "You cannot reserver a court more than 7 days ahead");
+			session.serverSay(TennisConstants.RESULT, "You cannot reserver a court more than 7 days ahead");
 			return;
 		}
 
 		session.serverSay("book.court", "please enter book court");
-        String courtName = session.lisClient("book.court");
-        Court court = new Court(courtName);
 
 		session.serverSay("book.period", "please enter book period(in hours)");
 		String periodStr = session.lisClient("book.period");
-		int period = Integer.valueOf(periodStr);
+		int period = Integer.parseInt(periodStr);
 		if (period > 2) {
-			session.serverSay("book.result", "You cannot reserver a court for more than 2 hours");
+			session.serverSay(TennisConstants.RESULT, "You cannot reserver a court for more than 2 hours");
 			return;
 		}
 
-		Order order = new Order(name, date, period, court);
-        session.serverSay("book.result", "Booked successfully");
-		System.out.println(order);
+        session.serverSay(TennisConstants.RESULT, "Booked successfully");
 	}
 
 	private boolean dateIntervalLessThan7(Date date) {
