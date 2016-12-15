@@ -3,6 +3,8 @@ package csd.starter;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.text.ParseException;
+
 public class MainTest {
 
 	@Test
@@ -15,20 +17,27 @@ public class MainTest {
 	}
 	
 	@Test
-	public void bookCourtTest(){
+	public void bookCourtTestMoreThan2Hours() throws ParseException {
 		User user=new User();
 		user.session.getClientRecords().put("book.court","westCourt");
-		user.session.getClientRecords().put("book.date","2016-12-15");
-		user.session.getClientRecords().put("book.time","01");
-		user.session.getClientRecords().put("book.period","2");
+		user.session.getClientRecords().put("book.date","2016-12-18");
+        user.session.getClientRecords().put("book.time","08");
+		user.session.getClientRecords().put("book.period","3");
 		user.bookCourt();
-		Assert.assertEquals("you have booked westCourt 01,02!", user.session.getServereRecords().get("book.result"));
-		user.session.getClientRecords().put("book.court","westCourt");
-		user.session.getClientRecords().put("book.time","03,1");
-		user.bookCourt();
-		Assert.assertEquals("max is two hours", user.session.getServereRecords().get("book.result"));
+		Assert.assertEquals("You cannot reserver a court for more than 2 hours", user.session.getServereRecords().get("book.result"));
 	}
-	
+
+    @Test
+    public void bookCourtTestBefore7Days() throws ParseException {
+        User user=new User();
+        user.session.getClientRecords().put("book.court","westCourt");
+        user.session.getClientRecords().put("book.date","2016-12-25");
+        user.session.getClientRecords().put("book.time","08");
+        user.session.getClientRecords().put("book.period","1");
+        user.bookCourt();
+        Assert.assertEquals("You cannot reserver a court more than 7 days ahead", user.session.getServereRecords().get("book.result"));
+    }
+
 	@Test
 	public void findNearestCourtTest(){		
 		User user=new User();
