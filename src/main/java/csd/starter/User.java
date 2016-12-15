@@ -46,23 +46,19 @@ public class User {
         session.serverSay("book.period", "please enter book period(in hours)");
         String periodStr = session.lisClient("book.period");
         if(Integer.valueOf(periodStr) > 2) {
-            session.serverSay("book.period", "You cannot reserver a court for more than 2 hours");
+            session.serverSay("book.result", "You cannot reserver a court for more than 2 hours");
             return;
         }
-//		String[] infoList = clientInfo.split(":");
-//		if (orderList.containsKey(clientInfo)) {
-//			session.serverSay("book", "This court has been booked!");
-//		} else {
-//			orderList.put(clientInfo, null);
-//			session.serverSay("book", "you have booked " + infoList[0] + " " + infoList[1] + "!");
-//		}
 
 	}
 	
 	private boolean dateIntervalLessThan7(Date date) {
-		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.add(GregorianCalendar.DAY_OF_MONTH, 7);
-		if(calendar.before(date)) {
+		GregorianCalendar now = new GregorianCalendar();
+        now.add(GregorianCalendar.DAY_OF_MONTH, 7);
+
+		GregorianCalendar expected = new GregorianCalendar();
+		expected.setTime(date);
+		if(now.before(expected)) {
 			return false;
 		}
 		return true;
