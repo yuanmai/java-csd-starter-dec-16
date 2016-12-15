@@ -15,27 +15,27 @@ import csd.starter.vo.Reservation;
 
 public class TennisReservation {
 	
-	private TennisReservation tennis=new TennisReservation();
+	private static TennisReservation tennis=new TennisReservation();
 	private static Map<String,Map<Integer,Reservation>> reservedMap = new ConcurrentHashMap <String,Map<Integer,Reservation>>();
-	private static Map<Integer,Court> countList = new ConcurrentHashMap<Integer, Court>();
+	private static Map<Court,Court> countList = new ConcurrentHashMap<Court, Court>();
 
 	private TennisReservation(){
 		
 	}
-	public TennisReservation getinstance(){
+	public static TennisReservation getinstance(){
 		if(tennis==null){
 			tennis=new TennisReservation();
 		}
 		return tennis;
 	}
-	public static void setAllCounts(List<Court> courts){
+	public  void setAllCounts(List<Court> courts){
 		countList.clear();
 		for(Court court : courts){
-			countList.put(court.getCountId(), court);
+			countList.put(court, court);
 		}
 	}
 
-	public static boolean makeReservation(Date bookTime, int hour, Player user, Court court){
+	public  boolean makeReservation(Date bookTime, int hour, Player user, Court court){
 		if(isAvailable(bookTime, hour, user)){
 			reservation(bookTime, hour, user, court);
 			return true;
@@ -44,42 +44,52 @@ public class TennisReservation {
 		}
 	}
 	
-	public static boolean isAvailable(Date bookTime, int hour, Player user){
+	public  boolean isAvailable(Date bookTime, int hour, Player user){
 		SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy/MM/dd");
 
 		LocalDateTime time = LocalDateTime.ofInstant(bookTime.toInstant(), ZoneId.systemDefault());
 		if(hour > 2){
-			return Boolean.valueOf(false);
+			return false;
 		}
 
 		if(time.minusDays(7).isAfter(LocalDateTime.now())){
-			return Boolean.valueOf(false);
+			return false;
 		}
 		String date=simpleFormat.format(bookTime);
+		String result=checkMultiReservation(date, user);
+		if(result!=null){
+			return Boolean.valueOf(result);
+		} 
+		
+		if(!reservedMap.containsKey(date)){
+			return true;
+		}	
+		Map<Integer, Reservation> reserved = reservedMap.get(date);
+		for (int i = 1; i <= hour; i++) {
+			if (reserved.get(time.getHour()) != null) {
+					return false;
+			}
+			time = time.plusHours(1);
+		}
+		
+		return true;
+	}
+	private String checkMultiReservation(String date, Player user) {
+	
+		String result=null;
 		Map<Integer,Reservation> dayReserve=reservedMap.get(date);
 		if(dayReserve==null){
-			return Boolean.valueOf(true);
+			result= "true";
 		}
 		for(Map.Entry<Integer, Reservation> entry: dayReserve.entrySet()){
 			if(user.getUserName().equals(entry.getValue().getUser().getUserName())){
-				return Boolean.valueOf(false); 
+				result ="false"; 
 			}
 		}
-		if(!reservedMap.containsKey(date)){
-			return Boolean.valueOf(true);
-		}else {	
-			Map<Integer, Reservation> reserved = reservedMap.get(date);
-			for (int i = 1; i <= hour; i++) {
-				if (reserved.get(time.getHour()) != null) {
-					return Boolean.valueOf(false);
-				}
-				time = time.plusHours(1);
-			}
-		}
-		return Boolean.valueOf(true);
+		return result;
 	}
 	
-	public static void reservation(Date bookTime, int hour, Player user,  Court court){
+	public  void reservation(Date bookTime, int hour, Player user,  Court court){
 		SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy/MM/dd");
 		LocalDateTime time = LocalDateTime.ofInstant(bookTime.toInstant(), ZoneId.systemDefault());
 		String date=simpleFormat.format(bookTime);

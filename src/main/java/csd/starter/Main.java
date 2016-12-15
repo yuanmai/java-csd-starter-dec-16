@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import csd.starter.vo.Court;
+import csd.starter.vo.Location;
 import csd.starter.vo.Player;
 public class Main {
 	private Main(){}
@@ -18,13 +19,12 @@ public class Main {
     	String[] inputs=getInput();
     	Player p1 = new Player(inputs[0]);
     	Date bookDate = dateFormat.parse(inputs[1]);
-		Court c1 = new Court(Integer.valueOf(inputs[3]));
-
-        TennisReservation.makeReservation(bookDate, Integer.valueOf(inputs[2]), p1,c1);
+    	Location loc=new Location(Integer.valueOf(inputs[3]),Integer.valueOf(inputs[4]));
+		Court c1 = new Court(loc);
+		TennisReservation tennis=TennisReservation.getinstance();
+		tennis.makeReservation(bookDate, Integer.valueOf(inputs[2]), p1,c1);
 
     }
-    
-
 
 	public static void scanner(Scanner s) {
         s.close();

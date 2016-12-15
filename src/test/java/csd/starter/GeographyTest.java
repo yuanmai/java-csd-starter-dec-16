@@ -1,27 +1,24 @@
 package csd.starter;
 
-import csd.starter.vo.Court;
-import org.junit.Assert;
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import csd.starter.vo.Court;
 import csd.starter.vo.Geography;
 import csd.starter.vo.Location;
 
-import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
-
 public class GeographyTest {
-
-    Court c1 = new Court(1);
+	static Location location_1 = new Location(1,2);
+    static Court c1 = new Court(location_1);
 
     @BeforeClass
-    public void add_one_count_size_should_be_one(){
+    public static void add_one_count_size_should_be_one(){
         Location location_1 = new Location(1,2);
-        c1.setLocation(location_1);
+        Court c2 = new Court(location_1);
     }
 
 
@@ -29,7 +26,7 @@ public class GeographyTest {
     public void same_site_should_return_itself() {
 
     	Location location_1 = new Location(1,2);
-        assertEquals(1,Geography.lookup(location_1 , Arrays.asList(c1)).getCountId());
+        assertEquals(c1,Geography.lookup(location_1 , Arrays.asList(c1)));
 //        Location location_2 = new Location(10,20);
 //        assertEquals(2,Geography.lookup(location_2).getId());
 //        Location location_3 = new Location(30,2);
@@ -42,7 +39,7 @@ public class GeographyTest {
     public void find_nearest_site() {
 
     	Location location_1 = new Location(1,3);
-        assertEquals(1,Geography.lookup(location_1 , Arrays.asList(c1)).getCountId());
+        assertEquals(c1,Geography.lookup(location_1 , Arrays.asList(c1)));
 //        Location location_2 = new Location(10,25);
 //        assertEquals(9,Geography.lookup(location_2).getId());
 //        Location location_3 = new Location(30,9);

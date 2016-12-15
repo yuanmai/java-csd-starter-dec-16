@@ -1,25 +1,25 @@
 package csd.starter.vo;
 
 public class Location {
-	private int x;
-	
+	private int x;	
 	private int y;  
-	public Location(int x2, int y2) {
-		// TODO Auto-generated constructor stub
-		this.x = x2;
-		this.y = y2;
-	}
-	public int getX() {
-		return x;
-	}
-	public void setX(int x) {
+	
+	public Location(int x, int y) {
 		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	public void setY(int y) {
 		this.y = y;
+	}
+
+	@Override
+	public String toString() {
+		return  x + ":" + y ;
+	}
+
+	public int compareLocationX(Location compareLocation){
+		return x-compareLocation.x;
+	}
+	
+	public int compareLocationY(Location compareLocation){
+		return y-compareLocation.y;
 	}
 	
 }
