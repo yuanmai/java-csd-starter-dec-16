@@ -1,14 +1,19 @@
 package csd.starter;
 
-import java.util.Scanner;
 
 /**
  * Created by jay on 12/13/16.
  */
 public class Feerate {
 
+	
 
-    public static int fee(int i) {
+    private Feerate() {
+		super();
+
+	}
+
+	public static int fee(int i) {
 
         if (i >= 8 && i <= 12){
             return 5;

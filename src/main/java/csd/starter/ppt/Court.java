@@ -10,4 +10,7 @@ public class Court {
     public Court(String tt) {
         courtName = tt;
     }
+    public String getCourtName(){
+    	return courtName;
+    }
 }

@@ -16,10 +16,10 @@ public class Payment {
 
     }
 
-    public void pay(Reservation reservation) throws Exception {
+    public void pay(Reservation reservation) throws NullPointerException {
 
         if (reservation == null)
-            throw new Exception();
+            throw new NullPointerException();
 
         if (reservation.isSuccessful()){
             account -= reservation.fee();

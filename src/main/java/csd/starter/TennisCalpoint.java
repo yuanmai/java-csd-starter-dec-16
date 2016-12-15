@@ -4,8 +4,13 @@ package csd.starter;
  * Created by jay on 12/14/16.
  */
 public class TennisCalpoint {
+	
 
-    public static String cal(int server, int receiver) {
+    private TennisCalpoint() {
+		super();
+	}
+
+	public static String cal(int server, int receiver) {
 
         String[] des = {"Love", "Fifteen", "Thirty", "Forty", "All"};
 
@@ -14,7 +19,7 @@ public class TennisCalpoint {
                 return des[server] + " " + des[receiver];
             }
 
-            if (server == receiver){
+            else {
                 return des[server] + " " + "All";
             }
         }

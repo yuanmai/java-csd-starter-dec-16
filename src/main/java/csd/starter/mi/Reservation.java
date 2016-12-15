@@ -26,7 +26,7 @@ public class Reservation {
     	int fee = 0;
     	int j = start;
     	for(int i = 0; i < duration; i ++){
-    		fee += FeeRateLookUp.feeRates[j];
+    		fee += FeeRateLookUp.getFeerates()[j];
     		j++;
     	}
         return fee;
@@ -34,5 +34,13 @@ public class Reservation {
 
     public boolean isSuccessful() {
         return time_range.getDuration() <= 2;
+    }
+    
+    public Player getPlayer(){
+    	return player;
+    }
+    
+    public Court getCourt(){
+    	return court;
     }
 }
