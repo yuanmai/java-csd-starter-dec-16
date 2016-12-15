@@ -10,10 +10,10 @@ public class Manager {
 	private String managerName;
 	private static List<Court> courtList = new ArrayList<Court>();
 	static{
-		courtList.add(new Court(1l, Double.valueOf(20), "East"));
-		courtList.add(new Court(2l, Double.valueOf(30), "West"));
-		courtList.add(new Court(3l, Double.valueOf(25), "North"));
-		courtList.add(new Court(4l, Double.valueOf(15), "South"));
+		courtList.add(new Court("East"));
+		courtList.add(new Court("West"));
+		courtList.add(new Court("North"));
+		courtList.add(new Court("South"));
 	}
 	
 	private static Map<Long, Order> orderList = new HashMap<Long, Order>();
